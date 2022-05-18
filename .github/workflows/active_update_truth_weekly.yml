@@ -54,7 +54,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: reichlab/covidData
-        token: ${{secrets.GH_TOKEN}}
+        #token: ${{secrets.GH_TOKEN}}
         path: covidData
         
     - name: Setup Python
@@ -70,8 +70,8 @@ jobs:
     - name: Install R dependencies (for covidData + covidHubUtils)
       working-directory: ./covid19-forecast-hub
       run: Rscript code/R_scripts/install_dependencies.R
-      env:
-        GITHUB_PAT: ${{ secrets.GH_TOKEN }}
+     # env:
+     #   GITHUB_PAT: ${{ secrets.GH_TOKEN }}
 
     - run: mkdir ./covidData/data-raw/JHU/
     
@@ -96,8 +96,8 @@ jobs:
     - name: Push generated files to GitHub
       run: bash ./travis/push-gh.sh
       working-directory: ./covid19-forecast-hub
-      env:
-        GH_TOKEN: ${{secrets.GH_TOKEN}}
+      #env:
+      #  GH_TOKEN: ${{secrets.GH_TOKEN}}
         
     - name: Check space available after update
       run: df --human-readable
